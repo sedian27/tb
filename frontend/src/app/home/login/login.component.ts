@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
     if (!this.loginData.email || !this.loginData.password) {
       this.message = 'Failed process: Imcomplete data';
       this.openSnackBarError();
-      this.loginData = {};
     } else {
       this._userService.login(this.loginData).subscribe({
         next: (v) => {

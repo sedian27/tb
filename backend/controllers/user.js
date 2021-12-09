@@ -115,7 +115,7 @@ const getUserRole = async (req, res) => {
     .findOne({ email: req.params.email })
     .populate("roleId")
     .exec();
-  if (userRole.length === 0)
+  if (!userRole)
     return res.status(400).send({ message: "No search results" });
 
   userRole = userRole.roleId.name;
