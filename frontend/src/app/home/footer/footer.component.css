@@ -1,10 +1,10 @@
+/* Footer bottom*/
 footer {
   width: 100%;
-  height: 70px;
-  position: absolute;
   background-color: #383d38;
   text-align: center;
   color: #cecccc;
-  padding: 30px;
+  padding: 10px;
+  position: fixed;
   bottom: 0;
 }

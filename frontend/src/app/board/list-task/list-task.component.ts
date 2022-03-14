@@ -141,15 +141,30 @@ export class ListTaskComponent implements OnInit {
     });
   }
 
+  removeTask(task: any, arr: any) {
+    let index = arr.indexOf(task);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+  }
+
   deleteTask(task: any) {
     this._boardService.deleteTask(task).subscribe({
       next: (v) => {
-        let index = this.taskData.indexOf(task);
-        if (index > -1) {
-          this.taskData.splice(index, 1);
-          this.message = v.message;
-          this.openSnackBarSuccesfull();
+        if (task.taskStatus === 'to-do') {
+          this.removeTask(task, this.taskTodo);
         }
+
+        if (task.taskStatus === 'in-progress') {
+          this.removeTask(task, this.taskInprogress);
+        }
+
+        if (task.taskStatus === 'done') {
+          this.removeTask(task, this.taskDone);
+        }
+
+        this.message = v.message;
+        this.openSnackBarSuccesfull();
       },
       error: (e) => {
         this.message = e.error.message;

@@ -36,18 +36,18 @@ export class ListRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._roleService.listRole().subscribe(
-      (res) => {
-        this.roleData = res.role;
+    this._roleService.listRole().subscribe({
+      next: (res) => {
+        this.roleData = res.roleList;
         this.dataSource = new MatTableDataSource(this.roleData);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
-      (err) => {
+      error: (err) => {
         this.message = err.error;
         this.openSnackBarError();
-      }
-    );
+      },
+    });
   }
 
   applyFilter(event: Event) {
